@@ -32,18 +32,18 @@ simple_paste<-function(...){
 
 
 
-update_plots<-function(temp=df.read, regional.filter=c() ){
+update_plots<-function(temp=df.filter, regional.filter=c() ){
 
-  temp<-temp %>%
-    dplyr::filter(Region %in% regional.filter) %>% 
+##  temp<-temp %>%
+##    dplyr::filter(Region %in% regional.filter) %>% 
     
     # transform the data to create bins for 1_ age and 2-income
     # 1.0 create bin for age
-    dplyr::mutate(age.bin=cut(Age, seq(min(Age), max(Age) + 4, 5), right = FALSE)) %>% 
+##    dplyr::mutate(age.bin=cut(Age, seq(min(Age), max(Age) + 4, 5), right = FALSE)) %>% 
     #dplyr::select(age.bin) %>% unique()
     # 2.0 create bin for Balance - Divide by 1000
     #dplyr::mutate(balance.bin=cut(Balance, seq(min(Balance), max(Balance) + 4, 5), right = FALSE)) %>%
-    dplyr::mutate(balance.bin=cut(Balance/1000, pretty(Balance/1000,15),right = FALSE ) )# %>%
+##    dplyr::mutate(balance.bin=cut(Balance/1000, pretty(Balance/1000,15),right = FALSE ) )# %>%
   #dplyr::mutate_at(dplyr::vars(balance.bin), function(x) as.character(paste0(as.character(x)," K") )  )
   
   
