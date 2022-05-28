@@ -32,11 +32,15 @@ library(raster)
 
 # 1.0 download the map
 #https://gadm.org/download_country.html
-UK_1 <- raster::getData("GADM", country= "GBR", level=1)
+##UK_1 <- raster::getData("GADM", country= "GBR", level=1)
 # Convert to sf object via st_as_sf() -> results in multipolygon
-bp_sf <- sf::st_as_sf(UK_1)
+##bp_sf <- sf::st_as_sf(UK_1)
 # object can be subdivided into single polygons using st_cast()
-bps_sf <- sf::st_cast(bp_sf, "POLYGON")
+##bps_sf <- sf::st_cast(bp_sf, "POLYGON")
+##saveRDS(bps_sf,"UKmap.RData")
+
+bps_sf<-readRDS("UKmap.RData")
+
 #filter on area
 #BpSf <- bps_sf[as.numeric(sf::st_area(bps_sf))>=10000,]
 
