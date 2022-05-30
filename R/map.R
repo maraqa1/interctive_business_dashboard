@@ -37,9 +37,9 @@ library(raster)
 ##bp_sf <- sf::st_as_sf(UK_1)
 # object can be subdivided into single polygons using st_cast()
 ##bps_sf <- sf::st_cast(bp_sf, "POLYGON")
-##saveRDS(bps_sf,"UKmap.RData")
+##saveRDS(bps_sf,"data/UKmap.RData")
 
-bps_sf<-readRDS("UKmap.RData")
+
 
 #filter on area
 #BpSf <- bps_sf[as.numeric(sf::st_area(bps_sf))>=10000,]
@@ -49,7 +49,7 @@ bps_sf<-readRDS("UKmap.RData")
 
 plot_uk_map<-function(regional.filter){
 #subset data
-
+bps_sf<-readRDS("data/UKmap.RData")
 BpSf <- bps_sf[bps_sf$NAME_1 %in% regional.filter,]
 
 colour.df<-data.frame(region=c("England","Northern Ireland","Scotland","Wales"),
