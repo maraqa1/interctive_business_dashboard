@@ -4,6 +4,8 @@ library(leaflet)
 library(rgdal)
 library(rmapshaper)
 library(raster)
+
+
 #http://www.jeremy-oakley.staff.shef.ac.uk/mas61004/EDAtutorial/maps-with-leaflet.html
 #boundaries <- rgdal::readOGR(dsn = "shape/Counties_and_Unitary_Authorities_(December_2016)_Boundaries",
 #                             layer = "Counties_and_Unitary_Authorities_(December_2016)_Boundaries" )
@@ -32,13 +34,15 @@ library(raster)
 
 # 1.0 download the map
 #https://gadm.org/download_country.html
-##UK_1 <- raster::getData("GADM", country= "GBR", level=1)
+### UK_1 <- raster::getData("GADM", country= "GBR", level=1)
+# Simplyfiy
+### UK_s<- rmapshaper::ms_simplify(UK_1)
 # Convert to sf object via st_as_sf() -> results in multipolygon
-##bp_sf <- sf::st_as_sf(UK_1)
+###bp_sf <- sf::st_as_sf(UK_s)
 # object can be subdivided into single polygons using st_cast()
-##bps_sf <- sf::st_cast(bp_sf, "POLYGON")
-##saveRDS(bps_sf,"data/UKmap.RData")
-
+###bps_sf <- sf::st_cast(bp_sf, "POLYGON")
+## write to shap file
+#sf::st_write(bp_sf , "data/my_shapefile.shp")
 
 
 #filter on area
@@ -47,9 +51,10 @@ library(raster)
 
 
 
-plot_uk_map<-function(regional.filter){
+plot_uk_map<-function(regional.filter=c("England","Wales","Scotland","Northern Ireland")){
 #subset data
-bps_sf<-readRDS("data/UKmap.RData")
+bps_sf<-rgdal::readOGR(dsn = "data/my_shapefile.shp")
+
 BpSf <- bps_sf[bps_sf$NAME_1 %in% regional.filter,]
 
 colour.df<-data.frame(region=c("England","Northern Ireland","Scotland","Wales"),

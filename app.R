@@ -1,10 +1,13 @@
 
-
+library(shinycssloaders)
 library(shiny)
 library(shinydashboard)
 library(fontawesome)
+library(ggplot2)
 source("R/map.R")
 source("R/graphs.R")
+
+renv::isolate()
 
 ui <- 
   shinydashboard::dashboardPage( 
@@ -23,22 +26,28 @@ ui <-
     ),
     
   dashboardBody(
+    fluidRow( 
+              h2(" Welcome to UK business Sample Dashboard", style = "font-family: monospace",style="color:#0000A0"),
+              tags$br(),
+              tags$br(),
+              ),
+    
     fluidRow(
     column(4,
 
            valueBoxOutput("value_1",width = "100%"),
-           box(title="UK Regions Map",leafletOutput("bid_no_bid_map", width="100%",height="400px"),width = NULL ,solidHeader = TRUE,status = "primary")
+           box(title="UK Regions Map",leafletOutput("bid_no_bid_map", width="100%",height="400px") %>% withSpinner(color="#0dc5c1"),width = NULL ,solidHeader = TRUE,status = "primary")
            
     ),
     column(4,
-           box(title="Balance",plotOutput("Plot.balance",width="100%",height="200px"),width = NULL ,solidHeader = TRUE,status = "primary"),
-           box(title="Age",plotOutput("Plot.age",width="100%",height="200px"),width = NULL ,solidHeader = TRUE,status = "primary")
+           box(title="Bfliudalance",plotOutput("Plot.balance",width="100%",height="200px")%>% withSpinner(color="#0dc5c1")%>% withSpinner(color="#0dc5c1"),width = NULL ,solidHeader = TRUE,status = "primary"),
+           box(title="Age",plotOutput("Plot.age",width="100%",height="200px")%>% withSpinner(color="#0dc5c1"),width = NULL ,solidHeader = TRUE,status = "primary")
            #box(title="UK regions",plotOutput("bid_no_bid_map"),width = NULL ,solidHeader = TRUE,status = "primary"),
            
     ),
     column(4,
-           box(title="Gender",plotOutput("Plot.gender",width="100%",height="200px"),width = NULL ,solidHeader = TRUE,status = "primary"),
-           box(title="Job",plotOutput("Plot.job",width="100%",height="200px"),width = NULL ,solidHeader = TRUE,status = "primary")
+           box(title="Gender",plotOutput("Plot.gender",width="100%",height="200px")%>% withSpinner(color="#0dc5c1"),width = NULL ,solidHeader = TRUE,status = "primary"),
+           box(title="Job",plotOutput("Plot.job",width="100%",height="200px")%>% withSpinner(color="#0dc5c1"),width = NULL ,solidHeader = TRUE,status = "primary")
 
            #box(title="UK regions",plotOutput("bid_no_bid_map"),width = NULL ,solidHeader = TRUE,status = "primary"),
     )
